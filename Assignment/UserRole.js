@@ -1,40 +1,44 @@
-const userStatus=[
+const userStatus = [
     {
-        name:"Alice",
-        role:"admin",
-        active:"false"
+        name: "Alice",
+        role: "admin",
+        active: "false"
 
     },
     {
-        name:"John",
-        role:"admin",
-        active:"true"
+        name: "John",
+        role: "admin",
+        active: "true"
 
     },
     {
-        name:"Bob",
-        role:"user",
-        active:"true"
+        name: "Bob",
+        role: "user",
+        active: "true"
 
     },
     {
-        name:"James",
-        role:"user",
-        active:"false"
+        name: "James",
+        role: "user",
+        active: "false"
 
     },
     {
-        name:"James",
-        role:"instructor",
-        active:"false"
+        name: "James",
+        role: "instructor",
+        active: "false"
 
     }
 ]
 
-for(let obj of userStatus){
-    (obj.role==="admin")?
-    ((obj.active==="true")?(console.log("Admin Access Granted")):(console.log("Admin Access Revoked")))
-    :(obj.role==="user")?
-    ((obj.active==="true")?(console.log("User Access Granted")):(console.log("User Access Revoked")))
-    :(console.log("Access Denied"));
+
+for (let obj of userStatus) {
+    console.log((
+        obj.role === "admin") ?
+        ((obj.active === "true") ?
+            "Admin Access Granted" : "Admin Access Revoked") :
+        (obj.role === "user") ?
+            ((obj.active === "true") ?
+                "User Access Granted" : "User Access Revoked") :
+            "Access Denied");
 }
