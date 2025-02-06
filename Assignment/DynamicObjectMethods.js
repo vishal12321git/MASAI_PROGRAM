@@ -14,16 +14,16 @@ let sentenceBuilder = {
     }
 }
 
-console.log(sentenceBuilder.buildSentence());
+//console.log(sentenceBuilder.buildSentence());
 
-sentenceBuilder.updateProperty("verb", "am learning");
-console.log(sentenceBuilder.buildSentence()); 
+//  sentenceBuilder.updateProperty("verb", "am learning");
+//  console.log(sentenceBuilder.buildSentence()); 
 
 sentenceBuilder.updateProperty("subject", "The cat");
 console.log(sentenceBuilder.buildSentence());
 
-sentenceBuilder.updateProperty("mood", "happy");
-console.log(sentenceBuilder.updateProperty("mood", "happy")); 
+// sentenceBuilder.updateProperty("mood", "happy");
+// console.log(sentenceBuilder.updateProperty("mood", "happy")); 
 
-sentenceBuilder.updateProperty("verb", "");
-console.log(sentenceBuilder.buildSentence()); 
+// sentenceBuilder.updateProperty("verb", "");
+// console.log(sentenceBuilder.buildSentence()); 
