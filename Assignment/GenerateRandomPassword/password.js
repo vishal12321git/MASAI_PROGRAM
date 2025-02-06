@@ -33,7 +33,7 @@ function generatePassword(length, includeNumbers = true, includeSpecialChars = t
         password.push(allCharacters[Math.floor(Math.random() * allCharacters.length)]);
     }
 
-    // Shuffle password to remove predictable patterns
+    
     for (let i = password.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [password[i], password[j]] = [password[j], password[i]];
@@ -42,7 +42,7 @@ function generatePassword(length, includeNumbers = true, includeSpecialChars = t
     return password.join("");
 }
 
-// Example usage
+
 console.log(generatePassword(10, true, true));
 console.log(generatePassword(8, true, false));
 console.log(generatePassword(12, false, true));
