@@ -31,8 +31,9 @@
     }
 
  ]
-
+let res=[]
  for(let obj of arr){
     let profile = `${obj.name} lives in ${obj.address.city} on ${obj.address.street.street_name}`
-    console.log(profile)
+    res.push(profile)
  }
+ console.log(res)
