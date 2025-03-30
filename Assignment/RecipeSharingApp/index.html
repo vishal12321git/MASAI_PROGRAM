@@ -3,10 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=dark_mode" />
     <title>Document</title>
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            color: #333;
+        }
+        header {
+            background: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        section {
+            padding: 20px;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #ff5e62;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #ff9966;
+        }
+        .recipe-card {
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .recipe-card h3 {
+            color: #ff5e62;
+        }
+    </style>
 </head>
 <body>
-    <h1>Recipe Sharing Web App</h1>
+    <header>
+        <h1>Recipe Sharing App</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#add-recipe">Add Recipe</a></li>
+                <li><a href="#view-recipes">View Recipes</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="add-recipe">
+        <h2>Add a New Recipe</h2>
+        <form id="recipe-form">
+            <label for="recipe-name">Recipe Name:</label>
+            <input type="text" id="recipe-name" required>
+
+            <label for="ingredients">Ingredients:</label>
+            <textarea id="ingredients" required></textarea>
+
+            <label for="category">Category:</label>
+            <select id="category" required>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Drinks">Drinks</option>
+            </select>
+
+            <label for="steps">Preparation Steps:</label>
+            <textarea id="steps" required></textarea>
+
+            <button type="submit">Add Recipe</button>
+        </form>
+    </section>
+
+    <section id="view-recipes">
+        <h2>Recipes</h2>
+        <label for="filter">Filter by Category:</label>
+        <select id="filter">
+            <option value="All">All</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Drinks">Drinks</option>
+        </select>
+        <div id="recipe-list"></div>
+    </section>
     <script src="index.js"></script>
 </body>
 </html>
