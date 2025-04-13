@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h3>${recipe.name}</h3>
                     <p><strong>Category:</strong> ${recipe.category}</p>
                     <p><strong>Ingredients:</strong></p>
-                    <table><tr><td>${recipe.ingredients.replace(/\n/g, "</td></tr><tr><td>")}</td></tr></table>
+                    <table><tr><td>${recipe.ingredients.split("\n").map(ing => ing.trim()).map((val)=>`<tr><td>${val}</td></tr>`)}</td></tr></table>
                     <p><strong>Steps:</strong></p>
                     <p>${recipe.steps}</p>
                 `;

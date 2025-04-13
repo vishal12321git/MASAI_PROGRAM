@@ -1,0 +1,16 @@
+{
+    "movies":{
+        "m1":{
+            "title":"Inception",
+            "year":2010,
+            "genre":"Sci-Fi",
+            "image":"https://posterspy.com/wp-content/uploads/2020/11/92756ED7-ABFF-4D1C-A627-05C517B343C8-1500x2250.jpeg"
+        },
+        "m2":{
+            "title":"Titanic",
+            "year":1997,
+            "genre":"Romance",
+            "image":"https://i.pinimg.com/originals/d6/d9/4c/d6d94ccea809def0791cb83c8347594a.jpg"
+        }
+    }
+}

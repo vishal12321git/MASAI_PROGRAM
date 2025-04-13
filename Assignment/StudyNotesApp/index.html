@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Notes App</title>
+    <link rel="stylesheet" href="./styles.css"></link>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Study Notes</h1>
+        <nav>
+            <li>Home</li>
+            <li>Create Notes</li>
+            <li>View Notes</li>
+            <li>Settings</li>
+        </nav>
+    </header>
+    <main>
+        <h2>Welcome to the Collaborative Study Notes App!</h2>
+        <p>Create, manage, and collaborate on your study notes effectively.</p>
+        <form>
+            <label for="title">Title:</label>
+            <input type="text" id="title">
+
+            <label for="description">Description</label>
+            <textarea id="description"></textarea>
+
+            <label for="topics">Topics:</label>
+            <select id="topics">
+                <option value="react"></option>
+                <option value="javascript"></option>
+                <option value="java"></option>
+                <option value="operating system"></option>
+                <option value="computer networking"></option>
+            </select>
+
+            <label for="priority">Priority</label>
+            <select>
+                <option value="High"></option>
+                <option value="Medium"></option>
+                <option value="Low"></option>
+            </select>
+
+            <label for="img">Upload Image</label>
+            <img src="">
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <div id="contact">
+            Contact Us
+        </div>
+        <div id="social-media-links">
+            Our Social media handles
+        </div>
+    </footer>
+</body>
+</html>

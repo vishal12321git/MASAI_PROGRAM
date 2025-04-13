@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete" />
+    <title>Movie Sphere</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #ccc;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            border-radius: 5px;
+            border: 2px solid white;
+            background-color: black;
+            padding: 15px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            border-radius: 5px;
+            gap: 10px;
+            padding: 15px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 10px;
+            background-color: #5a4c4c;
+            color: white;
+        }
+
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        .view-movie {
+            display: flex;
+            flex-direction: column;
+            padding-top: 2rem;
+            margin-top: 1.5rem;
+            background-color: brown;
+        }
+
+        .movie-container{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem;
+            padding: 1rem;
+        }
+
+        .movie-card {
+            height: 500px;
+            width: 300px;
+           
+            border: 2px solid black;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 13px
+            
+        }
+
+        .movie-card>img {
+            height: 80%;
+            width: 100%;
+        }
+
+        .delButton{
+            border:1px solid black;
+            border-radius: 5px;
+            
+            background-color: rgb(167, 167, 190);
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 style="text-align: center;">Movie Sphere</h1>
+    </div>
+
+    <div class="container">
+        <h3 style="font-size: 1.5rem;">Add Movie</h3>
+        <form id="add-movie">
+            <label for="title">Enter Movie Name</label>
+            <input id="title" type="text" placeholder="Movie name" required />
+
+            <label for="gener">Enter Movie Gener</label>
+            <input id="gener" type="text" placeholder="Movie gener" required />
+
+            <label for="image">Enter Movie Image URL</label>
+            <input id="image" type="text" placeholder="Image URL" required />
+
+            <label for="year">Enter Movie Release Date</label>
+            <input id="year" type="date" required />
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="view-movie">
+        No Movies Added Yet!
+    </div>
+    <script>
+        let form = document.getElementById('add-movie');
+        form.addEventListener("submit", addMovie);
+
+        async function addMovie(e) {
+            e.preventDefault();
+
+            let movieName = document.getElementById('title').value;
+            let movieGener = document.getElementById('gener').value;
+            let imageUrl = document.getElementById('image').value;
+            let year = document.getElementById('year').value;
+
+            if (!movieName || !movieGener || !imageUrl || !year) {
+                console.log("All fields are required!");
+                return;
+            }
+
+            let obj = {
+                title: movieName,
+                genre: movieGener,
+                image: imageUrl,
+                year: year
+            }
+
+            await saveMovie(obj);
+            form.reset();
+            await getAllMovie();
+        }
+
+
+        async function saveMovie(obj) {
+            try {
+                const options = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(obj)
+                }
+                console.log("movie saving.....")
+                const respnse = await fetch("https://moviedatabase-49299-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json", options);
+                const savedData = await respnse.json();
+                console.log("Movie saved with ID:", savedData.name);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+
+        async function getAllMovie() {
+            try {
+                let movieData = await fetch("https://moviedatabase-49299-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json");
+                movieData = await movieData.json();
+
+                let correctFormatMovieData = Object.entries(movieData);
+                let updatedData = correctFormatMovieData.map(([key, value]) => ({ id: key, ...value }));
+
+                const prevData = document.getElementsByClassName("view-movie")[0];
+                prevData.innerHTML = "";
+                const heading = document.createElement('h3')
+                heading.innerText="Your Movies"
+                heading.style.cssText="text-align:center;font-size: 1.5rem"
+                prevData.appendChild(heading);
+
+                const movieContainer = document.createElement('div');
+                movieContainer.classList.add("movie-container");
+        
+                updatedData.forEach((obj) => {
+                    const image = obj.image;
+                    const name = obj.title;
+                    const genre = obj.genre;
+                    const year = obj.year;
+
+
+                    const movieCard = document.createElement("div");
+                    movieCard.classList.add("movie-card");
+
+                    movieCard.innerHTML = `
+                    <img src="${image}" alt="${name}" />
+                    <h4>${name} <span>(${year})</span></h4>
+                    <p>${genre}</p>
+                    <span id="${obj.id}" class="material-symbols-outlined delButton">delete</span>
+                    `;
+
+                    movieContainer.appendChild(movieCard);
+                   
+                });
+
+                prevData.appendChild(movieContainer)
+
+               updatedData.forEach((obj)=>{
+                const deleteButton = document.getElementById(obj.id);
+                deleteButton.addEventListener("click",()=>deleteMovie(obj.id));
+               })
+               console.log(updatedData);
+            } catch (error) {
+                console.log("Error fetching or displaying movies:", error);
+            }
+        }
+
+        async function deleteMovie(movieId){
+            try{
+                const confirmationCard = document.createElement('div');
+                confirmation.classList.add("del-confirm");
+                confirmation.innerText=`
+                <p>Do you want to delete this movie?</p>
+                <button id="del-cancel">Cancel</button>
+                <button id="del-yes">Yes</button>
+                `
+                
+
+                console.log(movieId);
+            let response = await fetch(`https://moviedatabase-49299-default-rtdb.asia-southeast1.firebasedatabase.app/movies/${movieId}.json`,{
+                method:"DELETE"
+            })
+            console.log(`Movie with ID ${movieId} deleted.`)
+            }catch(error){
+                console.log(error);
+            }
+
+            getAllMovie();
+        }
+
+        async function showdata(){
+            await getAllMovie();
+        }
+       showdata();
+
+    </script>
+</body>
+
+</html>
